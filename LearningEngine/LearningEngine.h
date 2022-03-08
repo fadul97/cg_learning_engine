@@ -13,5 +13,6 @@
 #define LEARNING_ENGINE_H
 
 #include "Window.h"
+#include "Input.h"
 
 #endif // !LEARNING_ENGINE_H

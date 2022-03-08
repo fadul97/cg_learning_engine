@@ -22,7 +22,6 @@ void (*LearningEngine::Window::lostFocus)() = nullptr;			// No action when losin
 
 // -------------------------------------------------------------------------------
 // Constructor
-
 LearningEngine::Window::Window()
 {
 	windowId		= 0;										// Null ID because Window still doesn't exist
@@ -44,7 +43,6 @@ LearningEngine::Window::Window()
 
 // -------------------------------------------------------------------------------
 // Destructor
-
 LearningEngine::Window::~Window()
 {
 	// Release device context
@@ -53,7 +51,6 @@ LearningEngine::Window::~Window()
 
 // -------------------------------------------------------------------------------
 // Set enum WindowModes for Window (FULLSCREEN / WINDOWED / RESIZABLE_WINDOW)
-
 void LearningEngine::Window::SetMode(int mode)
 {
 	windowMode = mode;
@@ -85,7 +82,6 @@ void LearningEngine::Window::SetSize(int width, int height)
 
 // -------------------------------------------------------------------------------
 // Create Window with defined values
-
 bool LearningEngine::Window::Create()
 {
 	// Application ID
@@ -169,7 +165,6 @@ bool LearningEngine::Window::Create()
 
 // -------------------------------------------------------------------------------
 // Handle Windows events
-
 LRESULT CALLBACK LearningEngine::Window::WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)

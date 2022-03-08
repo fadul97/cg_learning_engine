@@ -39,7 +39,7 @@ namespace LearningEngine
 		HWND GetId();												// Returns Window ID (HWND)
 		int GetWidth();												// Returns Window width
 		int GetHeight();											// Returns Window height
-		double GetAspectRatio();										// Returns value of (width / height)
+		double GetAspectRatio();									// Returns value of (width / height)
 		int GetMode() const;										// Returns enum WindowModes: FULLSCREEN / WINDOWED / RESIZABLE_WINDOW
 		int GetCenterX() const;										// Returns center of Window on X-axis 
 		int GetCenterY() const;										// Returns center of Window on Y-axis
@@ -57,6 +57,9 @@ namespace LearningEngine
 		void Close();												// Close Window
 		void Clear();												// Clear client area
 		bool Create();												// Create Window with defined values
+
+		void OnFocus(void(*func)());								// Change function performed when gaining focus
+		void LostFocus(void(*func)());								// Change function performed when losing focus
 
 		// Handle Windows events
 		static LRESULT CALLBACK WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -151,6 +154,14 @@ namespace LearningEngine
 	// Clear client area
 	inline void Window::Clear()
 	{ FillRect(windowHdc, &windowRect, CreateSolidBrush(GetColor())); }
+
+	// Change function performed when gaining focus
+	inline void Window::OnFocus(void(*func)())
+	{ onFocus = func; }
+
+	// Change function performed when losing focus
+	inline void Window::LostFocus(void(*func)())
+	{ lostFocus = func; }
 }
 
 #endif // !LE_WINDOW_H
