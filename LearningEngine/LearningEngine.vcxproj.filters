@@ -1,17 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
+    <Filter Include="Engine">
+      <UniqueIdentifier>{75dfd197-eb6d-4256-a524-e9d6d2a16f5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source Files">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
+    <Filter Include="Engine\Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="Engine\Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Engine\Platform">
+      <UniqueIdentifier>{33d2d69a-8c8c-4d58-82b3-2d51e677ba45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Renderer">
+      <UniqueIdentifier>{c8d111dd-b34b-42e8-acaf-79eb1380e35c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Platform\Windows">
+      <UniqueIdentifier>{84323690-896e-458c-b272-39727f636544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Platform\Windows\Header Files">
+      <UniqueIdentifier>{c202b1ce-a260-42be-9569-4701ad384f2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Platform\Windows\Source Files">
+      <UniqueIdentifier>{cbd35508-80dd-4e1b-8ba1-87e23aca9aca}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Window.h">
+      <Filter>Engine\Platform\Windows\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LearningEngine.h">
+      <Filter>Engine\Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Window.cpp">
+      <Filter>Engine\Platform\Windows\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
 </Project>
