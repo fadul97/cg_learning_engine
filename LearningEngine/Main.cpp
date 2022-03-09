@@ -2,10 +2,11 @@
 // Main (Source File)
 //
 // Creation:	03/08/2022
-// Update:		--/--/----
+// Update:		03/09/2022
 // Compiler:	Visual C++ 2022
 //
-// Description:	Create a window to test Window Class from Engine
+// Description:	Test running application in a real-time loop.
+//				Change Window color by pressing space.
 //
 **********************************************************************************/
 
@@ -13,11 +14,76 @@
 // Includes
 
 #include "LearningEngine.h"
+#include <random>
 
-// Function prototypes and global variables
-LearningEngine::Window* window;
-void Welcome();
-void Bye();
+// Variables to set Window color - public just so we can play with them
+// Window will start White
+int r = 255;		// Red
+int g = 255;		// Green
+int b = 255;		// Blue
+
+class RandomColorApp : public LearningEngine::App
+{
+private:
+	// Variables to play with random numbers
+	std::random_device rd;
+	std::mt19937 mt;
+	std::uniform_int_distribution<int> dist;
+
+	
+public:
+	void Init();
+	void Update();
+	void Display();
+	void Finalize();
+};
+
+// ------------------------------------------------------------------------------
+
+void RandomColorApp::Init()
+{
+	// Set range for random numbers;
+	std::mt19937 mt(rd());
+	std::uniform_int_distribution<int> dist(0, 255);
+
+	r = dist(mt);
+	g = dist(mt);
+	b = dist(mt);
+}
+
+// ------------------------------------------------------------------------------
+
+void RandomColorApp::Update()
+{
+	// Quit by pressing ESC
+	if (input->GetKeyPress(VK_ESCAPE))
+		window->Close();
+
+	// Check if Space was pressed
+	if (input->GetKeyPress(VK_SPACE))
+	{
+		r = dist(mt);
+		g = dist(mt);
+		b = dist(mt);
+
+		window->Clear();
+		Display();
+	}
+}
+
+// ------------------------------------------------------------------------------
+
+void RandomColorApp::Display()
+{
+	// Set a new color to window
+	window->SetColor(r, g, b);
+}
+
+// ------------------------------------------------------------------------------
+
+void RandomColorApp::Finalize()
+{
+}
 
 // ------------------------------------------------------------------------------
 //                                  WinMain                                      
@@ -25,51 +91,18 @@ void Bye();
 
 int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
 {
-	// Set and Create Window
-	window = new LearningEngine::Window();
+	// Set and Create Engine
+	LearningEngine::Engine* engine = new LearningEngine::Engine();
 
-	window->SetMode(LearningEngine::WINDOWED);
-	window->SetSize(800, 600);
-	window->SetColor(211, 3, 252);
-	window->SetTitle("LearningEngine Window");
-	window->OnFocus(Welcome);
-	window->LostFocus(Bye);
-	window->Create();
+	engine->window->SetMode(LearningEngine::WINDOWED);
+	engine->window->SetSize(800, 600);
+	//engine->window->SetColor(211, 3, 252);
+	engine->window->SetColor(r, g, b);
+	engine->window->SetTitle("LearningEngine Window");
 
+	// Create and Execute App
+	int exitCode = engine->Start(new RandomColorApp());
 
-	// Read Input
-	LearningEngine::Input* input = new LearningEngine::Input();
-	
-	// Handle window messages
-	MSG msg = { 0 };
-	while (GetMessage(&msg, NULL, 0, 0))
-	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
-
-		if(input->GetKeyPress(VK_ESCAPE))
-			window->Close();
-
-		if (input->GetKeyPress(VK_SPACE))
-		{
-			window->SetColor(252, 3, 207);
-			window->Clear();
-		}
-	}
-
-	delete input;
-	delete window;
-	return 0;
-}
-
-void Welcome()
-{
-	window->SetColor(255, 0, 0);
-	window->Clear();
-}
-
-void Bye()
-{
-	window->SetColor(0, 0, 255);
-	window->Clear();
+	delete engine;
+	return exitCode;
 }

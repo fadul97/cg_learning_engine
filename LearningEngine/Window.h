@@ -24,7 +24,7 @@
 namespace LearningEngine
 {
 	// ---------------------------------------------------------------------------------
-	// Enum
+	// Enums
 
 	enum WindowModes { FULLSCREEN, WINDOWED, RESIZABLE_WINDOW };	// Engine window will use RESIZABLE_WINDOW, while the game or app window can use either of them
 
@@ -37,8 +37,8 @@ namespace LearningEngine
 		~Window();													// Destructor
 
 		HWND GetId();												// Returns Window ID (HWND)
-		int GetWidth();												// Returns Window width
-		int GetHeight();											// Returns Window height
+		double GetWidth();											// Returns Window width
+		double GetHeight();											// Returns Window height
 		double GetAspectRatio();									// Returns value of (width / height)
 		int GetMode() const;										// Returns enum WindowModes: FULLSCREEN / WINDOWED / RESIZABLE_WINDOW
 		int GetCenterX() const;										// Returns center of Window on X-axis 
@@ -93,11 +93,11 @@ namespace LearningEngine
 	{ return windowId; }
 
 	// Returns Window width
-	inline int Window::GetWidth()
+	inline double Window::GetWidth()
 	{ return windowWidth; }
 
 	// Returns Window height
-	inline int Window::GetHeight()
+	inline double Window::GetHeight()
 	{ return windowHeight; }
 
 	// Returns value of (width / height)

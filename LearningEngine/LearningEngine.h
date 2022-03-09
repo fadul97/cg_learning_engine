@@ -14,5 +14,9 @@
 
 #include "Window.h"
 #include "Input.h"
+#include "Engine.h"
+#include "Timer.h"
+#include "App.h"
+#include "Game.h"
 
 #endif // !LEARNING_ENGINE_H
