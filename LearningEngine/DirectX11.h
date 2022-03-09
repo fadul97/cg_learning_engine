@@ -1,38 +1,20 @@
 /**********************************************************************************
-// Graphics (Header File)
+// DirectX11 (Header File)
 //
 // Creation:	03/09/2022
 // Update:		--/--/----
 // Compiler:	Visual C++ 2022
 //
-// Description:	Abstract Class to represent APIs (DirectX)
+// Description:	Class that will use Direct3D functions from DirectX 11
 //
 **********************************************************************************/
 
-#ifndef LE_GRAPHICS_H
-#define LE_GRAPHICS_H
+#ifndef LE_DIRECTX11_H
+#define LE_DIRECTX11_H
 
 // ---------------------------------------------------------------------------------
 // Includes
 
-#include "Window.h"
 
-namespace LearninEngine
-{
-	namespace Renderer
-	{
-		class Graphics
-		{
-		public:
-			Graphics();
-			virtual ~Graphics();
 
-			virtual void Init() = 0;
-
-		private:
-
-		};
-	}
-}
-
-#endif // !LE_GRAPHICS_H
+#endif // !LE_DIRECTX11_H

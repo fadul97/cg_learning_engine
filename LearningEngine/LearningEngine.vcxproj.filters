@@ -31,13 +31,22 @@
     <Filter Include="Platform\Windows\Source Files">
       <UniqueIdentifier>{cbd35508-80dd-4e1b-8ba1-87e23aca9aca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Renderer\APIs">
+      <UniqueIdentifier>{5d6948ac-5c84-4516-8117-039f123bd86e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Renderer\APIs\DirectX11">
+      <UniqueIdentifier>{04a9e021-2d32-4291-9b0e-2244f2671860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Renderer\APIs\DirectX11\Header Files">
+      <UniqueIdentifier>{b0b085b8-24d2-41a2-a3d8-1a85ed641a13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Renderer\APIs\DirectX11\Source Files">
+      <UniqueIdentifier>{fc2c0239-3ac3-4109-833f-9f00403e3fce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Window.h">
       <Filter>Platform\Windows\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LearningEngine.h">
-      <Filter>Engine\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
       <Filter>Platform\Windows\Header Files</Filter>
@@ -56,6 +65,12 @@
     </ClInclude>
     <ClInclude Include="Error.h">
       <Filter>Engine\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Engine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="LearningEngine.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="Error.cpp">
       <Filter>Engine\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>Engine\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
