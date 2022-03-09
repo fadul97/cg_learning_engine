@@ -18,5 +18,6 @@
 #include "Timer.h"
 #include "App.h"
 #include "Game.h"
+#include "Error.h"
 
 #endif // !LEARNING_ENGINE_H

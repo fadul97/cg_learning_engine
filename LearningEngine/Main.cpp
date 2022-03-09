@@ -5,8 +5,9 @@
 // Update:		03/09/2022
 // Compiler:	Visual C++ 2022
 //
-// Description:	Test running application in a real-time loop.
-//				Change Window color by pressing space.
+// Description:	Testing Error Class. Same program from previous commit.
+//				->	Test running application in a real-time loop.
+//					Change Window color by pressing space.
 //
 **********************************************************************************/
 
@@ -17,10 +18,10 @@
 #include <random>
 
 // Variables to set Window color - public just so we can play with them
-// Window will start White
-int r = 255;		// Red
-int g = 255;		// Green
-int b = 255;		// Blue
+// Window will start Purple
+int r = 211;		// Red
+int g = 3;			// Green
+int b = 252;		// Blue
 
 class RandomColorApp : public LearningEngine::App
 {
@@ -91,18 +92,28 @@ void RandomColorApp::Finalize()
 
 int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
 {
-	// Set and Create Engine
-	LearningEngine::Engine* engine = new LearningEngine::Engine();
+	try
+	{
+		// Set and Create Engine
+		LearningEngine::Engine* engine = new LearningEngine::Engine();
 
-	engine->window->SetMode(LearningEngine::WINDOWED);
-	engine->window->SetSize(800, 600);
-	//engine->window->SetColor(211, 3, 252);
-	engine->window->SetColor(r, g, b);
-	engine->window->SetTitle("LearningEngine Window");
+		engine->window->SetMode(LearningEngine::WINDOWED);
+		engine->window->SetSize(800, 600);
+		//engine->window->SetColor(211, 3, 252);
+		engine->window->SetColor(r, g, b);
+		engine->window->SetTitle("LearningEngine Window");
 
-	// Create and Execute App
-	int exitCode = engine->Start(new RandomColorApp());
+		// Create and Execute App
+		int exitCode = engine->Start(new RandomColorApp());
 
-	delete engine;
-	return exitCode;
+		delete engine;
+		return exitCode;
+	}
+	catch (LearningEngine::Error& e)
+	{
+		// Show message if error occurred
+		MessageBox(nullptr, e.ToString().data(), "Main", MB_OK);
+		return 0;
+	}
+
 }
