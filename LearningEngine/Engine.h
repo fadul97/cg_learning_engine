@@ -16,40 +16,43 @@
 // ---------------------------------------------------------------------------------
 // Includes
 
-#include "Window.h"								// Window application
-#include "Input.h"								// Input device
-#include "Timer.h"								// Time counter
-#include "App.h"								// App implementation
-#include "Game.h"								// Game implementation
+#include "Window.h"													// Window application
+#include "Input.h"													// Input device
+#include "Timer.h"													// Time counter
+#include "App.h"													// App implementation
+#include "Game.h"													// Game implementation
+#include "DirectX11.h"												// Graphics device
 
 namespace LearningEngine
 {
 	class Engine
 	{
 	public:
-		Engine();								// Constructor
-		~Engine();								// Destructor
+		Engine();													// Constructor
+		~Engine();													// Destructor
+
+		static LearningEngine::Renderer::DirectX11* graphics;		// DirectX 11 device
 		
-		static Window* window;					// App Window
-		static Input* input;					// Input device
-		static Game* game;						// Game to be run
-		static App* app;						// App to be run
-		static double frameTime;				// Current frame time
+		static Window* window;										// App Window
+		static Input* input;										// Input device
+		static Game* game;											// Game to be run
+		static App* app;											// App to be run
+		static double frameTime;									// Current frame time
 
-		int Start(App* application);			// Start to execute app
+		int Start(App* application);								// Start to execute app
 
-		static void Pause();					// Pause engine
-		static void Resume();					// Resume engine
+		static void Pause();										// Pause engine
+		static void Resume();										// Resume engine
 
 		// Handle Windows events
 		static LRESULT CALLBACK EngineProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 	private:
-		static Timer timer;						// Time counter
-		static bool isPaused;					// Game state
+		static Timer timer;											// Time counter
+		static bool isPaused;										// Game state
 
-		double FrameTime();						// Calculate frame time
-		int Loop();								// Main Engine Loop
+		double FrameTime();											// Calculate frame time
+		int Loop();													// Main Engine Loop
 	};
 
 	// ---------------------------------------------------------------------------------

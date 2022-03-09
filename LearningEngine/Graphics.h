@@ -24,10 +24,10 @@ namespace LearninEngine
 		class Graphics
 		{
 		public:
-			Graphics();							// Constructor
-			virtual ~Graphics();				// Destructor
+			Graphics();														// Constructor
+			virtual ~Graphics();											// Destructor
 
-			virtual void Init() = 0;			// Initialize API
+			virtual bool Init(LearningEngine::Window* window) = 0;			// Initialize API
 
 		private:
 

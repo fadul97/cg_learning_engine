@@ -72,6 +72,9 @@
     <ClInclude Include="LearningEngine.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="DirectX11.h">
+      <Filter>Engine\Renderer\APIs\DirectX11\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Window.cpp">
@@ -98,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="Graphics.cpp">
       <Filter>Engine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectX11.cpp">
+      <Filter>Engine\Renderer\APIs\DirectX11\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

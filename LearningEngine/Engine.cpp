@@ -20,19 +20,21 @@
 // ---------------------------------------------------------------------------------
 // Initialization of static class members
 
-LearningEngine::Window	* LearningEngine::Engine::window	= nullptr;		// Game Window
-LearningEngine::Input	* LearningEngine::Engine::input		= nullptr;		// Input device
-LearningEngine::Game	* LearningEngine::Engine::game		= nullptr;		// Game running
-LearningEngine::App		* LearningEngine::Engine::app		= nullptr;		// App running
-double					  LearningEngine::Engine::frameTime	= 0.0;			// Current frame time
-bool					  LearningEngine::Engine::isPaused	= false;		// Game Loop state
-LearningEngine::Timer	  LearningEngine::Engine::timer;					// Time counter
+LearningEngine::Renderer::DirectX11		* LearningEngine::Engine::graphics	= nullptr;		// DirectX 11 device
+LearningEngine::Window					* LearningEngine::Engine::window	= nullptr;		// Game Window
+LearningEngine::Input					* LearningEngine::Engine::input		= nullptr;		// Input device
+LearningEngine::Game					* LearningEngine::Engine::game		= nullptr;		// Game running
+LearningEngine::App						* LearningEngine::Engine::app		= nullptr;		// App running
+double									  LearningEngine::Engine::frameTime	= 0.0;			// Current frame time
+bool									  LearningEngine::Engine::isPaused	= false;		// Game Loop state
+LearningEngine::Timer					  LearningEngine::Engine::timer;					// Time counter
 
 // ---------------------------------------------------------------------------------
 // Constructor
 LearningEngine::Engine::Engine()
 {
 	window = new Window();
+	graphics = new Renderer::DirectX11();
 }
 
 // ---------------------------------------------------------------------------------
@@ -45,6 +47,7 @@ LearningEngine::Engine::~Engine()
 	if (app)
 		delete app;
 
+	delete graphics;
 	delete input;
 	delete window;
 }
@@ -60,6 +63,9 @@ int LearningEngine::Engine::Start(App* application)
 
 	// Initialize input (must be done after creating window)
 	input = new Input();
+
+	// Initialize graphics device
+	graphics->Init(window);
 
 	// Change window procedure from active window to EngineProcedure
 	SetWindowLongPtr(window->GetId(), GWLP_WNDPROC, (LONG_PTR)EngineProcedure);
