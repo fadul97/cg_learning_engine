@@ -67,6 +67,9 @@ int LearningEngine::Engine::Start(App* application)
 	// Initialize graphics device
 	graphics->Init(window);
 
+	// Initialize Triangle
+	graphics->InitTriangle();
+
 	// Change window procedure from active window to EngineProcedure
 	SetWindowLongPtr(window->GetId(), GWLP_WNDPROC, (LONG_PTR)EngineProcedure);
 
@@ -162,8 +165,17 @@ int LearningEngine::Engine::Loop()
 				// Update application
 				app->Update();
 
-				// pplication draw
-				app->Draw();
+				// Clear screen for next frame
+				graphics->Clear();
+
+				// Draw application
+				//app->Draw();
+
+				// Draw Triangle
+				graphics->DrawTriangle();
+
+				// Present draw on screen (change FrontBuffer to BackBuffer)
+				graphics->Present();
 			}
 			else
 			{
@@ -195,7 +207,6 @@ LRESULT CALLBACK LearningEngine::Engine::EngineProcedure(HWND hWnd, UINT msg, WP
 		}
 	}
 	*/
-
 
 	return CallWindowProc(Input::InputProcedure, hWnd, msg, wParam, lParam);
 }

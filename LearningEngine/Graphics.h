@@ -27,7 +27,9 @@ namespace LearninEngine
 			Graphics();														// Constructor
 			virtual ~Graphics();											// Destructor
 
-			virtual bool Init(LearningEngine::Window* window) = 0;			// Initialize API
+			virtual bool Init(LearningEngine::Window* window) = 0;			// Initialize API3
+			virtual void Clear() = 0;										// Clear BackBuffer for next frame
+			virtual void Present() = 0;										// Present draw on screen (change FrontBuffer to BackBuffer)
 
 		private:
 

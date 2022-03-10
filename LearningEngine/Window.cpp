@@ -29,7 +29,7 @@ LearningEngine::Window::Window()
 	windowHeight	= GetSystemMetrics(SM_CYSCREEN);			// Window will take up entire screen (Y-axis) - FullScreen
 	windowIcon		= LoadIcon(NULL, IDI_APPLICATION);			// Default application icon
 	windowCursor	= LoadCursor(NULL, IDC_ARROW);				// Default application cursor
-	windowColor		= RGB(0, 0, 0);								// Background color is black
+	windowColor		= RGB(0, 0, 255);							// Background color is black
 	windowTitle		= std::string("Learning Engine");			// Default bar title name
 	windowStyle		= WS_POPUP | WS_VISIBLE;					// Style for FullScreen
 	windowMode		= FULLSCREEN;								// Default WindowModes value for enum - FULLSCREEN

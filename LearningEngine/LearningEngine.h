@@ -19,6 +19,7 @@
 #include "App.h"
 #include "Game.h"
 #include "Error.h"
+#include "Graphics.h"
 #include "DirectX11.h"
 
 #endif // !LEARNING_ENGINE_H
