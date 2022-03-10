@@ -27,6 +27,7 @@
 struct Vertex
 {
 	DirectX::XMFLOAT3 Pos;
+	DirectX::XMFLOAT4 Color;
 };
 
 // ---------------------------------------------------------------------------------
@@ -317,9 +318,9 @@ void LearningEngine::Renderer::DirectX11::InitTriangle()
 	// Set vertices
 	Vertex vertices[3] =
 	{
-		{ DirectX::XMFLOAT3(0.0f, 0.5f, 0.0f)},
-		{ DirectX::XMFLOAT3(0.5f, -0.5f, 0.0f)},
-		{ DirectX::XMFLOAT3(-0.5f, -0.5f, 0.0f)}
+		{ DirectX::XMFLOAT3(0.0f, 0.5f, 0.0f),		DirectX::XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },					// Red
+		{ DirectX::XMFLOAT3(0.5f, -0.5f, 0.0f),		DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f) },					// Green
+		{ DirectX::XMFLOAT3(-0.5f, -0.5f, 0.0f),	DirectX::XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f) }						// Blue
 	};
 
 	// Describe Buffer - Resource structure
@@ -382,9 +383,10 @@ void LearningEngine::Renderer::DirectX11::InitTriangle()
 	ID3D11InputLayout* inputLayout;
 
 	// Description of Vertex Structure we created
-	D3D11_INPUT_ELEMENT_DESC inputDesc[1] =
+	D3D11_INPUT_ELEMENT_DESC inputDesc[2] =
 	{
 		{ "POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT, 0,  0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "COLOR",		0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }				// 3 'floats' x 4 bytes = 12 bytes
 	};
 
 	// Create input layout
