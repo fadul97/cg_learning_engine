@@ -2,13 +2,13 @@
 // Main (Source File)
 //
 // Creation:	03/08/2022
-// Update:		03/09/2022
+// Update:		03/11/2022
 // Compiler:	Visual C++ 2022
 //
-// Description:	Testing DirectX11 Class by building a 'Hello, Triangle!' that is
-//				using Direct3D.
+// Description:	Testing DirectX11 Class by building a 'Hello, Quad!' that is
+//				using shaders in Direct3D.
 //				-> Changes in Engine.cpp: Start() and Loop() methods.
-//
+//				OBS: Don't mind DirectX11 class method names.
 **********************************************************************************/
 
 // ---------------------------------------------------------------------------------

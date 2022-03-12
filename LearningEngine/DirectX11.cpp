@@ -2,7 +2,7 @@
 // DirectX11 (Source File)
 //
 // Creation:	03/09/2022
-// Update:		03/10/2022
+// Update:		03/11/2022
 // Compiler:	Visual C++ 2022
 //
 // Description:	Class that uses Direct3D functions from DirectX 11
@@ -27,30 +27,31 @@
 struct Vertex
 {
 	DirectX::XMFLOAT3 Pos;
+	DirectX::XMFLOAT4 Color;
 };
 
 // ---------------------------------------------------------------------------------
 // Initialization of static class members
 
-ID3D11Device		* LearningEngine::Renderer::DirectX11::d3d11Device		= nullptr;				// Graphics device
-ID3D11DeviceContext	* LearningEngine::Renderer::DirectX11::d3d11DevContext	= nullptr;				// Graphics device context
-D3D11_VIEWPORT		  LearningEngine::Renderer::DirectX11::viewport			= { 0 };				// Viewport
+ID3D11Device* LearningEngine::Renderer::DirectX11::d3d11Device = nullptr;				// Graphics device
+ID3D11DeviceContext* LearningEngine::Renderer::DirectX11::d3d11DevContext = nullptr;				// Graphics device context
+D3D11_VIEWPORT		  LearningEngine::Renderer::DirectX11::viewport = { 0 };				// Viewport
 
 // -------------------------------------------------------------------------------
 // Constructor
 LearningEngine::Renderer::DirectX11::DirectX11()
 {
-	renderTargetView	= nullptr;						// Back buffer Render Target View - RTV
-	depthStencilView	= nullptr;						// Back buffer Render Target View - RTV
-	swapChain			= nullptr;						// Swap Chain
-	vertexShader		= nullptr;						// Manages Vertex Shade Program and control Vertex Shader Stage 
-	pixelShader			= nullptr;						// Manages Pixel Shader Program and controls Pixel Shader Stage
-	vertexBuffer		= nullptr;						// Buffer resource
+	renderTargetView = nullptr;						// Back buffer Render Target View - RTV
+	depthStencilView = nullptr;						// Back buffer Render Target View - RTV
+	swapChain = nullptr;						// Swap Chain
+	vertexShader = nullptr;						// Manages Vertex Shade Program and control Vertex Shader Stage 
+	pixelShader = nullptr;						// Manages Pixel Shader Program and controls Pixel Shader Stage
+	vertexBuffer = nullptr;						// Buffer resource
 
-	featureLevel		= D3D_FEATURE_LEVEL_11_0;		// Level of D3D features supported by GPU 
+	featureLevel = D3D_FEATURE_LEVEL_11_0;		// Level of D3D features supported by GPU 
 
-	antialiasing		= 1;							// Number of samples for antialiasing
-	quality				= 0;							// Sample quality level
+	antialiasing = 1;							// Number of samples for antialiasing
+	quality = 0;							// Sample quality level
 
 	bgColor[0] = 1.0f;									// Red
 	bgColor[1] = 1.0f;									// Green
@@ -160,9 +161,9 @@ bool LearningEngine::Renderer::DirectX11::Init(LearningEngine::Window* window)
 	// Set background color to be the same of window color
 	COLORREF color = window->GetColor();
 
-	bgColor[0] = GetRValue(color)/255.0f;                       // Red
-	bgColor[1] = GetGValue(color)/255.0f;                       // Green
-	bgColor[2] = GetBValue(color)/255.0f;                       // Blue
+	bgColor[0] = GetRValue(color) / 255.0f;                       // Red
+	bgColor[1] = GetGValue(color) / 255.0f;                       // Green
+	bgColor[2] = GetBValue(color) / 255.0f;                       // Blue
 	bgColor[3] = 1.0f;											// Alpha (0 = transparent)
 
 	// -------------------------------
@@ -198,22 +199,22 @@ bool LearningEngine::Renderer::DirectX11::Init(LearningEngine::Window* window)
 	// -------------------------------
 
 	// Describe Swap Chain
-	DXGI_SWAP_CHAIN_DESC swapChainDesc				= {0};
-	swapChainDesc.BufferDesc.Width					= UINT(window->GetWidth());								// Back buffer width
-	swapChainDesc.BufferDesc.Height					= UINT(window->GetHeight());							// Back buffer height
-	swapChainDesc.BufferDesc.RefreshRate.Numerator	= 60;													// Refresh rate in hertz 
-	swapChainDesc.BufferDesc.RefreshRate.Numerator	= 1;													// Numerator is an int
-	swapChainDesc.BufferDesc.Format					= DXGI_FORMAT_R8G8B8A8_UNORM;							// Color format - RGBA 8 bits
+	DXGI_SWAP_CHAIN_DESC swapChainDesc = { 0 };
+	swapChainDesc.BufferDesc.Width = UINT(window->GetWidth());								// Back buffer width
+	swapChainDesc.BufferDesc.Height = UINT(window->GetHeight());							// Back buffer height
+	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;													// Refresh rate in hertz 
+	swapChainDesc.BufferDesc.RefreshRate.Numerator = 1;													// Numerator is an int
+	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;							// Color format - RGBA 8 bits
 	//swapChainDesc.BufferDesc.ScanlineOrdering		= DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;					// Default value for Flags
 	//swapChainDesc.BufferDesc.Scaling				= DXGI_MODE_SCALING_UNSPECIFIED;						// Default mode for scaling
-	swapChainDesc.SampleDesc.Count					= antialiasing;											// Samples per pixel (antialiasing)
-	swapChainDesc.SampleDesc.Quality				= quality;												// Level of image quality
-	swapChainDesc.BufferUsage						= DXGI_USAGE_RENDER_TARGET_OUTPUT;						// Use surface as Render Target
-	swapChainDesc.BufferCount						= 2;													// Number of buffers (Front + Back)
-	swapChainDesc.OutputWindow						= window->GetId();										// Window ID
-	swapChainDesc.Windowed							= (window->GetMode() == WINDOWED);						// Fullscreen or windowed 
-	swapChainDesc.SwapEffect						= DXGI_SWAP_EFFECT_DISCARD;								// Discard surface after presenting
-	swapChainDesc.Flags								= DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;				// Use Back buffer size for Fullscreen
+	swapChainDesc.SampleDesc.Count = antialiasing;											// Samples per pixel (antialiasing)
+	swapChainDesc.SampleDesc.Quality = quality;												// Level of image quality
+	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;						// Use surface as Render Target
+	swapChainDesc.BufferCount = 2;													// Number of buffers (Front + Back)
+	swapChainDesc.OutputWindow = window->GetId();										// Window ID
+	swapChainDesc.Windowed = (window->GetMode() == WINDOWED);						// Fullscreen or windowed 
+	swapChainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;								// Discard surface after presenting
+	swapChainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;				// Use Back buffer size for Fullscreen
 
 	// Create Swap Chain
 	if FAILED(dxgiFactory->CreateSwapChain(d3d11Device, &swapChainDesc, &swapChain))
@@ -245,18 +246,18 @@ bool LearningEngine::Renderer::DirectX11::Init(LearningEngine::Window* window)
 	// -------------------------------
 
 	// Describe Depth/Stencil Buffer Desc
-	D3D11_TEXTURE2D_DESC depthStencilDesc	= {0};
-	depthStencilDesc.Width					= UINT(window->GetWidth());					// Depth/Stencil buffer width
-	depthStencilDesc.Height					= UINT(window->GetHeight());				// Depth/Stencil buffer height
-	depthStencilDesc.MipLevels				= 0;										// Number of mipmap levels
-	depthStencilDesc.ArraySize				= 1;										// Number of textures in array
-	depthStencilDesc.Format					= DXGI_FORMAT_D24_UNORM_S8_UINT;			// Color format - Does it need to be the same format of swapChainDesc?
-	depthStencilDesc.SampleDesc.Count		= antialiasing;								// Samples per pixel (antialiasing)
-	depthStencilDesc.SampleDesc.Quality		= quality;									// Level of image quality
-	depthStencilDesc.Usage					= D3D11_USAGE_DEFAULT;						// Default - GPU will both read and write to the resource
-	depthStencilDesc.BindFlags				= D3D11_BIND_DEPTH_STENCIL;					// Where resource will be bound to the pipeline
-	depthStencilDesc.CPUAccessFlags			= 0;										// CPU will not read not write to the Depth/Stencil buffer
-	depthStencilDesc.MiscFlags				= 0;										// Optional flags
+	D3D11_TEXTURE2D_DESC depthStencilDesc = { 0 };
+	depthStencilDesc.Width = UINT(window->GetWidth());					// Depth/Stencil buffer width
+	depthStencilDesc.Height = UINT(window->GetHeight());				// Depth/Stencil buffer height
+	depthStencilDesc.MipLevels = 0;										// Number of mipmap levels
+	depthStencilDesc.ArraySize = 1;										// Number of textures in array
+	depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;			// Color format - Does it need to be the same format of swapChainDesc?
+	depthStencilDesc.SampleDesc.Count = antialiasing;								// Samples per pixel (antialiasing)
+	depthStencilDesc.SampleDesc.Quality = quality;									// Level of image quality
+	depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;						// Default - GPU will both read and write to the resource
+	depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;					// Where resource will be bound to the pipeline
+	depthStencilDesc.CPUAccessFlags = 0;										// CPU will not read not write to the Depth/Stencil buffer
+	depthStencilDesc.MiscFlags = 0;										// Optional flags
 
 	// Create Depth/Stencil Buffer
 	ID3D11Texture2D* depthStencilBuffer;
@@ -284,7 +285,7 @@ bool LearningEngine::Renderer::DirectX11::Init(LearningEngine::Window* window)
 	// Describe Viewport
 	viewport.TopLeftY = 0.0f;
 	viewport.TopLeftX = 0.0f;
-	viewport.Width	= static_cast<float>(window->GetWidth());
+	viewport.Width = static_cast<float>(window->GetWidth());
 	viewport.Height = static_cast<float>(window->GetHeight());
 	viewport.MinDepth = 0.0f;
 	viewport.MaxDepth = 1.0f;
@@ -306,7 +307,7 @@ bool LearningEngine::Renderer::DirectX11::Init(LearningEngine::Window* window)
 }
 
 // -------------------------------------------------------------------------------
-// Initialize some pipeline stages to setup triangle
+// Initialize some pipeline stages to setup triangle -> QUAD for this build
 void LearningEngine::Renderer::DirectX11::InitTriangle()
 {
 	// ------------------------------------------------------------------------------------------------------------------------------------------------
@@ -315,24 +316,27 @@ void LearningEngine::Renderer::DirectX11::InitTriangle()
 	// ----------------------
 
 	// Set vertices
-	Vertex vertices[3] =
+	Vertex vertices[6] =
 	{
-		{ DirectX::XMFLOAT3(0.0f, 0.5f, 0.0f)},
-		{ DirectX::XMFLOAT3(0.5f, -0.5f, 0.0f)},
-		{ DirectX::XMFLOAT3(-0.5f, -0.5f, 0.0f)}
+		{ DirectX::XMFLOAT3(-0.5f, -0.5f, 0.0f),		DirectX::XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },					// Red
+		{ DirectX::XMFLOAT3(-0.5f,  0.5f, 0.0f),		DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f) },					// Green
+		{ DirectX::XMFLOAT3(0.5f, -0.5f, 0.0f),		DirectX::XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f) },					// Blue
+		{ DirectX::XMFLOAT3(0.5f, -0.5f, 0.0f),		DirectX::XMFLOAT4(1.0f, 0.0f, 1.0f, 1.0f) },					// Purple
+		{ DirectX::XMFLOAT3(-0.5f,  0.5f, 0.0f),		DirectX::XMFLOAT4(0.0f, 1.0f, 1.0f, 1.0f) },					// Yellow
+		{ DirectX::XMFLOAT3(0.5f,  0.5f, 0.0f),		DirectX::XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f) },					// Blue
 	};
 
 	// Describe Buffer - Resource structure
 	D3D11_BUFFER_DESC bufferDesc = { 0 };
-	bufferDesc.ByteWidth = sizeof(Vertex) * ARRAYSIZE(vertices);					
-	bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;								
+	bufferDesc.ByteWidth = sizeof(Vertex) * ARRAYSIZE(vertices);
+	bufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
 	bufferDesc.Usage = D3D11_USAGE_IMMUTABLE;
 	bufferDesc.CPUAccessFlags = 0;
 	bufferDesc.MiscFlags = 0;
 	bufferDesc.StructureByteStride = 0;
 
 	// Set data we want to initialize the buffer contents with
-	D3D11_SUBRESOURCE_DATA srd = {vertices, 0, 0};
+	D3D11_SUBRESOURCE_DATA srd = { vertices, 0, 0 };
 
 	// Create Buffer
 	if FAILED(d3d11Device->CreateBuffer(&bufferDesc, &srd, &vertexBuffer))
@@ -341,7 +345,7 @@ void LearningEngine::Renderer::DirectX11::InitTriangle()
 
 
 	// ------------------------------------------------------------------------------------------------------------------------------------------------
-	DWORD shaderFlags = 0;									
+	DWORD shaderFlags = 0;
 #ifndef _DEBUG
 	shaderFlags |= D3D10_SHADER_DEBUG;						// Let compiler insert debug information into the output code
 	shaderFlags |= D3D10_SHADER_SKIP_OPTIMIZATION;			// Compiler will not validate the generated code -> Recommended to use only with successfully compiled shaders
@@ -352,10 +356,10 @@ void LearningEngine::Renderer::DirectX11::InitTriangle()
 	// ----------------------
 	// Vertex Shader Stage
 	// ----------------------
-	
+
 	// Compile and Create Vertex Shader
 	ID3DBlob* shaderCompileErrorsBlob;						// To get info about compilation
-	
+
 	ID3DBlob* vsBlob;										// Vertex shader
 	if FAILED(D3DCompileFromFile(L"VertexShader.hlsl", nullptr, nullptr, "main", "vs_5_0", shaderFlags, NULL, &vsBlob, &shaderCompileErrorsBlob))
 		MessageBoxA(nullptr, "Failed to compile Vertex Shader.", 0, 0);
@@ -382,16 +386,17 @@ void LearningEngine::Renderer::DirectX11::InitTriangle()
 	ID3D11InputLayout* inputLayout;
 
 	// Description of Vertex Structure we created
-	D3D11_INPUT_ELEMENT_DESC inputDesc[1] =
+	D3D11_INPUT_ELEMENT_DESC inputDesc[2] =
 	{
 		{ "POSITION",	0, DXGI_FORMAT_R32G32B32_FLOAT, 0,  0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{ "COLOR",		0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }				// 3 'floats' x 4 bytes = 12 bytes
 	};
 
 	// Create input layout
 	ThrowIfFailed(d3d11Device->CreateInputLayout(inputDesc, ARRAYSIZE(inputDesc), vsBlob->GetBufferPointer(), vsBlob->GetBufferSize(), &inputLayout))
-	
-	// Bind input layout to the Imput Assembler Stage
-	d3d11DevContext->IASetInputLayout(inputLayout);
+
+		// Bind input layout to the Imput Assembler Stage
+		d3d11DevContext->IASetInputLayout(inputLayout);
 
 	// Tell how Direct3D will form geometric primitives from vertex data
 	d3d11DevContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -412,12 +417,12 @@ void LearningEngine::Renderer::DirectX11::DrawTriangle()
 
 	// Bind Vertex Buffer to an input slot of the device
 	d3d11DevContext->IASetVertexBuffers(0, 1, &vertexBuffer, &stride, &offset);
-	
+
 	// Bind Vertex and Pixel Shaders
 	d3d11DevContext->VSSetShader(vertexShader, nullptr, 0);
 	d3d11DevContext->PSSetShader(pixelShader, nullptr, 0);
-	
+
 	// Draw
-	UINT numVerts = 3;
+	UINT numVerts = 6;
 	d3d11DevContext->Draw(numVerts, 0);
 }

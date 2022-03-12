@@ -1,4 +1,10 @@
-float4 main() : SV_TARGET
+struct pixelIn
 {
-	return float4(1.0f, 1.0f, 1.0f, 1.0f);
+    float4 PosH  : SV_POSITION;
+    float4 Color : COLOR;
+};
+
+float4 main(pixelIn pIn) : SV_TARGET
+{
+    return pIn.Color;
 }
