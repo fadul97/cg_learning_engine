@@ -316,11 +316,14 @@ void LearningEngine::Renderer::DirectX11::InitTriangle()
 	// ----------------------
 
 	// Set vertices
-	Vertex vertices[3] =
+	Vertex vertices[6] =
 	{
-		{ DirectX::XMFLOAT3(0.0f, 0.5f, 0.0f),		DirectX::XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },					// Red
-		{ DirectX::XMFLOAT3(0.5f, -0.5f, 0.0f),		DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f) },					// Green
-		{ DirectX::XMFLOAT3(-0.5f, -0.5f, 0.0f),	DirectX::XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f) }						// Blue
+		{ DirectX::XMFLOAT3(-0.5f, -0.5f, 0.0f),		DirectX::XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },					// Red
+		{ DirectX::XMFLOAT3(-0.5f,  0.5f, 0.0f),		DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f) },					// Green
+		{ DirectX::XMFLOAT3( 0.5f, -0.5f, 0.0f),		DirectX::XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f) },					// Blue
+		{ DirectX::XMFLOAT3( 0.5f, -0.5f, 0.0f),		DirectX::XMFLOAT4(1.0f, 0.0f, 1.0f, 1.0f) },					// Purple
+		{ DirectX::XMFLOAT3(-0.5f,  0.5f, 0.0f),		DirectX::XMFLOAT4(0.0f, 1.0f, 1.0f, 1.0f) },					// Yellow
+		{ DirectX::XMFLOAT3( 0.5f,  0.5f, 0.0f),		DirectX::XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f) },					// Blue
 	};
 
 	// Describe Buffer - Resource structure
@@ -420,6 +423,6 @@ void LearningEngine::Renderer::DirectX11::DrawTriangle()
 	d3d11DevContext->PSSetShader(pixelShader, nullptr, 0);
 	
 	// Draw
-	UINT numVerts = 3;
+	UINT numVerts = 6;
 	d3d11DevContext->Draw(numVerts, 0);
 }
