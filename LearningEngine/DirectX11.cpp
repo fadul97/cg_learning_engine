@@ -307,7 +307,7 @@ bool LearningEngine::Renderer::DirectX11::Init(LearningEngine::Window* window)
 }
 
 // -------------------------------------------------------------------------------
-// Initialize some pipeline stages to setup triangle -> QUAD for this build
+// Initialize some pipeline stages to setup triangle
 void LearningEngine::Renderer::DirectX11::InitTriangle()
 {
 	// ------------------------------------------------------------------------------------------------------------------------------------------------
@@ -320,10 +320,10 @@ void LearningEngine::Renderer::DirectX11::InitTriangle()
 	{
 		{ DirectX::XMFLOAT3(-0.5f, -0.5f, 0.0f),		DirectX::XMFLOAT4(1.0f, 0.0f, 0.0f, 1.0f) },					// Red
 		{ DirectX::XMFLOAT3(-0.5f,  0.5f, 0.0f),		DirectX::XMFLOAT4(0.0f, 1.0f, 0.0f, 1.0f) },					// Green
-		{ DirectX::XMFLOAT3(0.5f, -0.5f, 0.0f),		DirectX::XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f) },					// Blue
-		{ DirectX::XMFLOAT3(0.5f, -0.5f, 0.0f),		DirectX::XMFLOAT4(1.0f, 0.0f, 1.0f, 1.0f) },					// Purple
-		{ DirectX::XMFLOAT3(-0.5f,  0.5f, 0.0f),		DirectX::XMFLOAT4(0.0f, 1.0f, 1.0f, 1.0f) },					// Yellow
-		{ DirectX::XMFLOAT3(0.5f,  0.5f, 0.0f),		DirectX::XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f) },					// Blue
+		{ DirectX::XMFLOAT3( 0.5f, -0.5f, 0.0f),		DirectX::XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f) },					// Blue
+		{ DirectX::XMFLOAT3( 0.5f, -0.5f, 0.0f),		DirectX::XMFLOAT4(1.0f, 0.0f, 1.0f, 1.0f) },					// Purple
+		{ DirectX::XMFLOAT3(-0.5f,  0.5f, 0.0f),		DirectX::XMFLOAT4(1.0f, 1.0f, 0.0f, 1.0f) },					// Yellow
+		{ DirectX::XMFLOAT3( 0.5f,  0.5f, 0.0f),		DirectX::XMFLOAT4(0.0f, 0.0f, 1.0f, 1.0f) },					// Blue
 	};
 
 	// Describe Buffer - Resource structure

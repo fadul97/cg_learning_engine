@@ -38,8 +38,8 @@ namespace LearningEngine
 			static ID3D11DeviceContext* GetContext();			// Returns D3D device context
 			static D3D11_VIEWPORT viewport;						// Viewport
 
-			void InitTriangle();								// Initialize some pipeline stages to setup triangle
-			void DrawTriangle();								// Draw triangle
+			void InitTriangle();								// Initialize some pipeline stages to setup triangle	-> QUAD* (Don't mind method name) 
+			void DrawTriangle();								// Draw triangle										-> QUAD* (Don't mind method name) 
 
 		private:
 			static ID3D11Device			* d3d11Device;			// Graphics device

@@ -43,13 +43,13 @@
     <Filter Include="Engine\Renderer\APIs\DirectX11\Source Files">
       <UniqueIdentifier>{fc2c0239-3ac3-4109-833f-9f00403e3fce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Renderer\APIs\DirectX11\Source Files\Shaders">
+    <Filter Include="Engine\Renderer\Shaders">
       <UniqueIdentifier>{13196f6b-e89c-41ef-9872-577f512a1ff9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Renderer\APIs\DirectX11\Source Files\Shaders\Vertex Shaders">
+    <Filter Include="Engine\Renderer\Shaders\Vertex Shaders">
       <UniqueIdentifier>{eb68fa8d-b12c-4df4-8c7d-60bbfd4a6ef4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Renderer\APIs\DirectX11\Source Files\Shaders\Pixel Shaders">
+    <Filter Include="Engine\Renderer\Shaders\Pixel Shaders">
       <UniqueIdentifier>{31f8b93b-d9a6-428b-884b-c3898ff7d5bc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -116,11 +116,11 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="VertexShader.hlsl">
-      <Filter>Engine\Renderer\APIs\DirectX11\Source Files</Filter>
-    </FxCompile>
     <FxCompile Include="PixelShader.hlsl">
-      <Filter>Engine\Renderer\APIs\DirectX11\Source Files</Filter>
+      <Filter>Engine\Renderer\Shaders\Pixel Shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="VertexShader.hlsl">
+      <Filter>Engine\Renderer\Shaders\Vertex Shaders</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
